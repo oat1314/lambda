@@ -130,5 +130,31 @@ public class TestStream3 {
                 })));
         System.out.println(map);
     }
+
+    //分区
+    @Test
+    public void test7() {
+        Map<Boolean,List<Employee>> map = emps.stream()
+                .collect(Collectors.partitioningBy((e)->e.getSalary() >= 5000));
+        System.out.println(map);
+    }
+
+    @Test
+    public void  test8() {
+        String str = emps.stream()
+                .map(Employee::getName)
+                .collect(Collectors.joining(",","----","----"));
+
+        System.out.println(str);
+    }
+
+    @Test
+    public void test9() {
+        Optional<Double> sum = emps.stream()
+                .map(Employee::getSalary)
+                .collect(Collectors.reducing(Double::sum));
+
+        System.out.println(sum);
+    }
 }
 
